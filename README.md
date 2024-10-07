@@ -81,4 +81,18 @@ Send JSON in this format:
     ]
 }
 ```
-Create's a project.
+Create's a project. If the language is not in the array_data.json bucket then it is added.
+
+
+#### Get all user projects
+
+```http
+  GET /api/autocomplete
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `type` | `string` | **Required**. The type of array ie. languages. |
+| `search` | `string` | **Required**. The string needing autocomplete. |
+
+Returns a list of potential autocomplete.
