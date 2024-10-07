@@ -84,7 +84,7 @@ Send JSON in this format:
 Create's a project. If the language is not in the array_data.json bucket then it is added.
 
 
-#### Get all user projects
+#### Get autocomplete from string
 
 ```http
   GET /api/autocomplete
@@ -96,3 +96,19 @@ Create's a project. If the language is not in the array_data.json bucket then it
 | `search` | `string` | **Required**. The string needing autocomplete. |
 
 Returns a list of potential autocomplete.
+
+Example REQUEST: 
+```bash
+GET http://localhost:5000/api/autocomplete?type=languages&search=script
+```
+
+Example RESPONSE:
+```JSON
+[
+  "javascript",
+  "typescript",
+  "actionscript",
+  "postscript",
+  "jscript"
+]
+```
