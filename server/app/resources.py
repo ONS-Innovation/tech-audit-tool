@@ -1,15 +1,17 @@
 import json
 from flask_restx import Resource, Namespace, reqparse, fields, abort
 from .api_models import get_project_model
+# from .models import Project
 from .utils import read_data, write_data, read_array_data, write_array_data
+from .extensions import api
 
-ns = Namespace('api')
+ns = Namespace('/api/', path="/api/", description="")
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('owner_email', type=str, required=True, help='owner_email is required')
 
 required_param = {'owner_email': 'The email of the project owner'}
-
 
 def require_owner_email(func):
     def wrapper(*args, **kwargs):
@@ -20,10 +22,10 @@ def require_owner_email(func):
         return func(*args, **kwargs)
     return wrapper
 
-@ns.doc(params=required_param)
 @ns.route("/projects")
+@ns.doc(params=required_param)
 class Projects(Resource):
-    # @ns.marshal_with(get_project_model(), as_list=True)
+    @ns.marshal_with(get_project_model(), as_list=True)
     @require_owner_email
     def get(self):
         args = parser.parse_args()
@@ -32,6 +34,7 @@ class Projects(Resource):
         user_projects = [proj for proj in data['projects'] if proj["user"][0]['email'] == owner_email]
         return user_projects
     
+    @ns.expect(get_project_model())
     @require_owner_email
     def post(self):
         new_project = ns.payload
@@ -68,7 +71,7 @@ class Projects(Resource):
 @ns.doc(params=required_param)
 @ns.route("/projects/<string:project_name>")
 class ProjectDetail(Resource):
-    # @ns.marshal_with(get_project_model(), as_list=True)
+    @ns.marshal_list_with(get_project_model())
     @require_owner_email
     def get(self, project_name):
         args = parser.parse_args()
