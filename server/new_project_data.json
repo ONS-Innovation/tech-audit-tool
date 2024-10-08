@@ -1,0 +1,42 @@
+
+{   
+    "explanation":[
+        "User is a list as possibility of adding multiple users per team in future. Roles is list as user may have multiple roles in team.",
+        "Details is just a dict.",
+        "Developed is a list as if the list length is more than 1 then it is a partnership and the second item in the list will be the list of the partnership.",
+        "Source control is just a list.",
+        "Architecture is a dict of dicts. Each has a main ___ that is used and the option to have others or leave the list empty."
+    ],
+    "projects": [
+        {
+            "user": [ 
+                {
+                    "email": "",
+                    "roles": [
+                        "owner"
+                    ]
+                }
+            ],
+            "details": {
+                "name": "Project1",
+                "short_name": "This is project 1",
+                "documentation_link": ""
+            },
+            "developed":[  
+                "Partnership",
+                ["ONS", "GDS"]
+            ],
+            "source_control":[
+                "GitHub"
+            ],
+            "architecture": {
+                "hosting": {"type": "Hybrid", "detail": []},
+                "database": {"main": "MongoDB", "others": []},
+                "languages": {"main": "Python", "others": ["JavaScript", "Java"]},
+                "frameworks": {"main": "React", "others": []},
+                "CICD": {"main": "Python", "others": ["JavaScript", "Java"]},
+                "infrastructure": {"main": "Python", "others": []}
+            }
+        }
+    ]
+}

@@ -12,6 +12,9 @@ run-api:
 run-api-test:
 	poetry run python server/unittest.py
 
+run-new-api:
+	export FLASK_APP=server.app
+	poetry run flask run
 
 format-python:
 	poetry run isort .
